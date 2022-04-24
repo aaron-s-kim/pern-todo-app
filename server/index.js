@@ -1,3 +1,6 @@
+require("dotenv").config(); // Load .env data into process.env
+// console.log(process.env); // confirm .env vars
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
