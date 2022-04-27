@@ -1,15 +1,27 @@
-require("dotenv").config(); // Load .env data into process.env
-// console.log(process.env); // confirm .env vars
-
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const path = require("path");
 const PORT = process.env.PORT || 8000;
+
+// process.env.PORT
+// process.env.NODE_ENV => production or undefined
 
 // Middleware
 app.use(cors());
-app.use(express.json()); // req.body
+app.use(express.json()); // allows us to access req.body
+
+// app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static("./client/build"));
+
+if (process.env.NODE_ENV === "production") {
+  // server static content
+  // npm run build
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
+
+console.log(__dirname);
 
 // ROUTES //
 
@@ -77,21 +89,24 @@ app.delete("/todos/:id", async(req, res) => {
 });
 
 
-const urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
-};
-app.get("/", (req, res) => {
-  res.send("Hello!!!!");
-});
-app.get("/hello", (req, res) => {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
-});
-app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
-});
+// const urlDatabase = {
+//   "b2xVn2": "http://www.lighthouselabs.ca",
+//   "9sm5xK": "http://www.google.com"
+// };
+// app.get("/", (req, res) => {
+//   res.send("Hello!!!!");
+// });
+// app.get("/hello", (req, res) => {
+//   res.send("<html><body>Hello <b>World</b></body></html>\n");
+// });
+// app.get("/urls.json", (req, res) => {
+//   res.json(urlDatabase);
+// });
 
-
+// Redirect invalid urls to main page
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);

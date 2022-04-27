@@ -1,13 +1,17 @@
 import React, { Fragment, useState } from "react";
 
 const InputTodo = () => {
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
 
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { description }
-      const response = await fetch("http://localhost:8000/todos", {
+      const body = { description };
+      // proxy is only used in development, will be ignored in production
+      // if no http://localhost:8000 then by default, will use heroku domain
+      // this heroku app is just our server serving the build static content
+
+      const response = await fetch("/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
