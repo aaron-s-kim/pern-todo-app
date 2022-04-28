@@ -27,11 +27,13 @@ const ListTodos = () => {
       console.error(err.message);      
     }
   }
+
   useEffect(() => {
     getTodos();
   }, []);
 
   console.log(todos);
+  
   return (
     <Fragment>
       {" "}

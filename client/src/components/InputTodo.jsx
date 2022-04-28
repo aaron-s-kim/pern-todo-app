@@ -14,14 +14,15 @@ const InputTodo = () => {
       const response = await fetch("/todos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
       });
+
       // console.log(response);
       window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
   return (
     <Fragment>
@@ -29,6 +30,7 @@ const InputTodo = () => {
       <form className="d-flex mt-5" onSubmit={onSubmitForm}>
         <input
           type="text"
+          placeholder="add todo"
           className="form-control"
           value={description}
           onChange={e => setDescription(e.target.value)}
