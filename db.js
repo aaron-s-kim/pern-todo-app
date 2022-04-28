@@ -12,7 +12,7 @@ const devConfig = {
   database: process.env.PG_DATABASE,
   port: process.env_PG_PORT,
 };
-
+console.log('test');
 const proConfig = {
   connectionString: process.env.DATABASE_URL // heroku addons
 };
