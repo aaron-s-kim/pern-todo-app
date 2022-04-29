@@ -31,7 +31,6 @@ app.get('/db', async (req, res) => {
     const result = await client.query('SELECT * FROM todo');
     const results = { 'results': (result) ? result.rows : null};
     res.json(results);
-    // res.render('pages/db', results );
     client.release();
   } catch (err) {
     console.error(err);

@@ -3,7 +3,6 @@ const Pool = require("pg").Pool;
 require("dotenv").config(); // Load .env data into process.env
 // console.log(process.env); // confirm .env vars
 
-
 // Method 1
 // const devConfig = {
 //   user: process.env.PG_USER,
