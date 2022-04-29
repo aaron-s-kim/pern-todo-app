@@ -28,7 +28,7 @@ console.log(path.join(__dirname, "client/build"));
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect();
-    const result = await client.query('SELECT * FROM test_table');
+    const result = await client.query('SELECT * FROM todo');
     const results = { 'results': (result) ? result.rows : null};
     res.json(results);
     // res.render('pages/db', results );
